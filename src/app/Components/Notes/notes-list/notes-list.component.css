@@ -1,0 +1,48 @@
+#add-success-alert,
+#delete-success-alert,
+#update-success-alert {
+    display: none;
+}
+
+#add-success-alert,
+#delete-success-alert,
+#update-success-alert {
+    animation-name: fadeInAndOut;
+    animation-duration: 4s;
+}
+
+@-webkit-keyframes fadeInAndOut {
+    0% {opacity: 0;}
+    50% {opacity: 1;}
+    100% {opacity: 0;}
+}
+
+@keyframes fadeInAndOut {
+    0% {opacity: 0;}
+    50% {opacity: 1;}
+    100% {opacity: 0;}
+}
+
+.containerNote {
+    min-height: 800px;
+    height: auto;
+    border-radius: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    background: rgba(73, 73, 73, 0.377);
+}
+
+.card {
+    width: 300px;
+    height: 250px;
+    margin: 9px;
+}
+
+.toast {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    background: rgb(43, 43, 43);
+}
+
+.toast-header {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    background: rgb(216, 216, 216);
+}

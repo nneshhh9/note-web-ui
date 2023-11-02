@@ -1,0 +1,184 @@
+<div class="text-bg-dark p-5">
+  
+  <div class="container text-center">
+
+    <!-- всплывающее окно уведомления при добавлении, удалении, редактировании -->
+    <div class="succes" style="width: 300;">
+      <div class="alert alert-success" role="alert" id="add-success-alert">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check-circle-fill" viewBox="0 0 16 16">
+          <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z"/>
+        </svg>
+        Inspection successfully added!
+      </div>
+
+      <div class="alert alert-success" role="alert" id="delete-success-alert">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check-circle-fill" viewBox="0 0 16 16">
+          <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z"/>
+        </svg>
+        Inspection successfully delete!
+      </div>
+
+      <div class="alert alert-success" role="alert" id="update-success-alert">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check-circle-fill" viewBox="0 0 16 16">
+          <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z"/>
+        </svg>
+        Inspection successfully update!
+      </div>
+    </div>
+    
+    <!-- кнопка добавление заметки -->
+    <button type="button" class="btn btn-outline-light" data-bs-toggle="modal" data-bs-target="#ModalAdd">
+      Add a note
+    </button>
+
+    <!-- модель добавления заметки -->
+    <div class="modal fade" id="ModalAdd" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog" >
+
+        <div class="modal-content" style="background:rgb(41, 41, 41) ;">
+
+          <div class="modal-header">
+            <h1 class="modal-title fs-5" id="exampleModalLabel">Add Note</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+
+          <form class="needs-validation" #form="ngForm" (ngSubmit)="addNote()">
+            <div class="modal-body" style="background: rgb(73, 73, 73);">
+                <div class="row g-3">
+
+                  <div class="col-sm-12">
+                    <input type="text" class="form-control" id="noteTitle" placeholder="Add Note Title" value="" required=""
+                    name="noteTitle" [(ngModel)]="NoteDetails.noteTitle">
+                  </div>
+            
+                  <div class="col-12" style="height: 100px">
+                    <textarea type="text" class="form-control" id="noteContext" style="height: 100px" placeholder="Add Note Context" required="" 
+                    name="noteContext" [(ngModel)]="NoteDetails.noteContext"></textarea>
+                  </div>
+
+                </div>
+              
+                <hr class="my-4">
+    
+                <div class="col-12" >
+                  <label for="cc-name" class="form-label" >Tags</label>
+                  <select class="form-select" aria-label="Default select example" 
+                  name="tag" [(ngModel)]="NoteDetails.TagsId">
+                    <option *ngFor="let tag of tags" [value]="tag.id"> {{ tag.tagName }} </option>
+                  </select>
+                </div>
+            </div>
+
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+              <button type="button" class="btn btn-outline-success" (click)="addNote()">Save changes</button>
+            </div>
+          </form>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- модель редактирования заметки -->
+    <div class="modal fade" id="ModalUpdate" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog" >
+
+        <div class="modal-content" style="background:rgb(41, 41, 41);">
+
+          <div class="modal-header">
+            <h1 class="modal-title fs-5" id="exampleModalLabel">Edit Note</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+
+          <form class="needs-validation" #form="ngForm" (ngSubmit)="getNote()">
+            <div class="modal-body" style="background: rgb(73, 73, 73); ">
+                <div class="row g-3">
+                  <div class="col-sm-12">
+                    <input type="text" class="form-control" id="noteTitle" placeholder="Edit Note Title" value="" required=""
+                    name="noteTitle" [(ngModel)]="NoteDetails.noteTitle">
+                  </div>
+            
+                  <div class="col-12" style="height: 100px">
+                    <textarea type="text" class="form-control" id="noteContext" style="height: 100px" placeholder="Edit Note Context" required="" 
+                    name="noteContext" [(ngModel)]="NoteDetails.noteContext"></textarea>
+                  </div>
+                </div>
+              
+                <hr class="my-4">
+    
+                <div class="col-12" >
+                  <label for="cc-name" class="form-label" >Tags</label>
+                  <select class="form-select" aria-label="Default select example" 
+                  name="tag" [(ngModel)]="NoteDetails.TagsId">
+                    <option *ngFor="let tag of tags" [value]="tag.id"> {{ tag.tagName }} </option>
+                  </select>
+                </div>
+            </div>
+
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+              <button type="button" class="btn btn-outline-success" (click)="updateNote()">Update</button>
+            </div>
+          </form>
+
+        </div>
+      </div>
+    </div>
+
+    <hr class="my-4">
+
+    <!-- note -->
+    <div class="containerNote">
+      <div class="col d-flex flex-wrap gap-2" *ngIf="notes && notes.length > 0">
+        <div class="card text-bg-dark" style="max-width: 30rem; height: 350px" *ngFor="let note of notes">
+          <div class="card-header">{{ note.noteTitle }}</div>
+          <div class="card-body">
+            <div>
+              <p class="card-text">{{ note.noteContext }}</p>
+            </div>
+          </div>
+          <div>
+            <span class="badge text-bg-warning rounded-pill mb-1"> {{ note.tags?.tagName }} </span>
+          </div>
+          <div>
+            <p> {{ note.noteReminder }} </p>
+          </div>
+          <div>
+            <button type="button" class="btn btn-outline-success mb-3 me-3" data-bs-toggle="modal" data-bs-target="#ModalUpdate" id="getNote" (click)="getNote(note?.id)" >
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
+                <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
+                <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"/>
+              </svg>
+            </button>
+            <button type="button" class="btn btn-outline-danger mb-3 " (click)="deleteNote(note?.id)">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
+                <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5Zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5Zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6Z"/>
+                <path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1ZM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118ZM2.5 3h11V2h-11v1Z"/>
+              </svg>
+            </button>
+          </div>
+        </div>
+      </div>
+      <p *ngIf="!notes || notes.length <= 0">Not Notes Found</p>
+      
+    </div>
+
+    <!-- уведомление о напоминании -->
+    <div class="toast-container position-fixed bottom-0 end-0 p-3">
+      <form class="needs-validation" #form="ngForm" (ngSubmit)="getOnlyTime()" >
+        <div id="liveToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true" *ngFor="let reminder of reminders">
+          <div class="toast-header">
+            <strong class="me-auto">{{ reminder.note?.noteTitle }}</strong>
+            <small>{{ reminder.timeReminder }}</small>
+            <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+          </div>
+          <div class="toast-body">
+            {{ reminder.note?.noteContext }}
+          </div>
+        </div>
+      </form>
+    </div>
+
+  </div>
+</div>
+

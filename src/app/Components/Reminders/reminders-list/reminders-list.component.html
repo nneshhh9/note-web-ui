@@ -1,0 +1,93 @@
+<div class="class text-bg-dark p-5">
+
+  <!-- всплывающее окно уведомления при добавлении или удалении -->
+  <div class="succes" style="width: 300;">
+    <div class="alert alert-success" role="alert" id="add-success-alert">
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check-circle-fill" viewBox="0 0 16 16">
+        <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z"/>
+      </svg>
+      Inspection successfully added!
+    </div>
+
+    <div class="alert alert-success" role="alert" id="delete-success-alert">
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check-circle-fill" viewBox="0 0 16 16">
+        <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z"/>
+      </svg>
+      Inspection successfully delete!
+    </div>
+  </div>
+
+  <!-- модель добавления напоминания -->
+  <div class="modal fade" id="ModalAdd" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" >
+
+      <div class="modal-content" style="background:rgb(41, 41, 41) ;">
+
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalLabel">Add Reminder</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+
+        <form class="needs-validation" #form="ngForm" (ngSubmit)="addReminder()">
+          <div class="modal-body" style="background: rgb(73, 73, 73);">
+              <div class="row g-3">
+
+                <div class="col-sm-12">
+                  <label for="cc-name" class="form-label" >Reminder date</label>
+                  <input type="datetime-local" class="form-control" id="noteTitle" placeholder="Add Reminder" value="" required="" 
+                  name="timeReminder" [(ngModel)]="ReminderDetails.timeReminder">
+                </div>
+
+              </div>
+            
+              <hr class="my-4">
+  
+              <div class="col-12" >
+                <label for="cc-name" class="form-label" >Note Title</label>
+                <select class="form-select" aria-label="Default select example" 
+                name="note" [(ngModel)]="ReminderDetails.noteId">
+                  <option *ngFor="let note of notes" [value]="note.id"> {{ note.noteTitle }} </option>
+                </select>
+              </div>
+          </div>
+
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-outline-success" (click)="addReminder()">Save changes</button>
+          </div>
+        </form>
+
+      </div>
+    </div>
+  </div>
+
+  <div class="container text-center">
+    <!-- кнопка добавление напоминания -->
+    <button type="button" class="btn btn-outline-light" data-bs-toggle="modal" data-bs-target="#ModalAdd">
+      Add a reminder
+    </button>
+
+    <hr class="my-4">
+
+    <!-- список напоминаний -->
+    <div class="containerRem">
+      <div class=" flex-md-row p-4 gap-4 py-md-5 align-items-center justify-content-center" *ngIf="reminders && reminders.length > 0">
+        <ul class="list-group" >
+          <div class="list-group mb-3 " *ngFor="let reminder of reminders" >
+            <label class="list-group-item d-flex gap-5" >
+              <span class="pt-1 form-checked-content" >
+                <strong> {{ reminder.note?.noteTitle }} </strong>
+                <small class="d-block text-body-secondary">
+                  Reminder date: {{ reminder.timeReminder }}
+                </small>
+              </span>
+            </label>
+          </div>
+        </ul>
+      </div>
+      <p *ngIf="!reminders || reminders.length <= 0">Not Reminder Found</p>
+
+    </div>
+
+  </div>
+</div>

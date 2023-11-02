@@ -1,0 +1,67 @@
+<div class="text-bg-dark p-5">
+    <div class="container">
+
+        <!-- всплывающее окно уведомления при добавлении или удалении -->
+        <div class="succes" style="width: 300;">
+            <div class="alert alert-success" role="alert" id="add-success-alert">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check-circle-fill" viewBox="0 0 16 16">
+                    <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z"/>
+                  </svg>
+                Inspection successfully added!
+            </div>
+    
+            <div class="alert alert-success" role="alert" id="delete-success-alert">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check-circle-fill" viewBox="0 0 16 16">
+                    <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z"/>
+                  </svg>
+                Inspection successfully delete!
+            </div>
+        </div>
+
+        <!-- кнопка добавления -->
+        <div class="btnTag">
+            <form #form="ngForm" (ngSubmit)="addTag()" >
+                <div class="input-group me-3 mb-3" >
+                    <input id="tagName" type="text" class="form-control" placeholder="Add a tag" aria-label="Recipient's username" aria-describedby="button-addon2" 
+                    name="tagName" [(ngModel)]="TagDetails.tagName">
+                    <button type="button" class="btn btn-outline-light" 
+                    (click)="addTag()">Add</button>
+                </div>
+            </form>
+        </div>
+
+        <hr class="my-4">
+
+        <!-- таблица тегов -->
+        <div class="containerTag " >
+            <h1 class="nameTags" style="text-align: center;">List Tags</h1>
+            
+            <div class="tableTag">
+                <table class="table table-hover table-dark" *ngIf="tags && tags.length > 0">
+                    <thead class="table-hover">
+                        <tr>
+                            <th scope="col">Tags</th>
+                            <th scope="col">Editor</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="tr" *ngFor="let tag of tags">
+                            <td>{{ tag.tagName }}</td>
+                            <td>
+                                <button type="button" class="btn btn-outline-danger" (click)="deleteTag(tag.id)">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
+                                        <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5Zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5Zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6Z"></path>
+                                        <path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1ZM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118ZM2.5 3h11V2h-11v1Z"></path>
+                                    </svg>
+                                    Delete
+                                </button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <p *ngIf="!tags || tags.length <= 0">Not Tags Found</p>
+
+        </div>
+    </div>
+</div>

@@ -1,0 +1,44 @@
+<div class="class">
+  <nav class="navbar bg-body-tertiary" data-bs-theme="dark">
+    <div class="container-fluid nav-tabs">
+
+      <a class="navbar-brand" href="#">
+        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" class="bi bi-journal-check" viewBox="0 0 16 16">
+          <path fill-rule="evenodd" d="M10.854 6.146a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 1 1 .708-.708L7.5 8.793l2.646-2.647a.5.5 0 0 1 .708 0z"/>
+          <path d="M3 0h10a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2v-1h1v1a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H3a1 1 0 0 0-1 1v1H1V2a2 2 0 0 1 2-2z"/>
+          <path d="M1 5v-.5a.5.5 0 0 1 1 0V5h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1H1zm0 3v-.5a.5.5 0 0 1 1 0V8h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1H1zm0 3v-.5a.5.5 0 0 1 1 0v.5h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1H1z"/>
+        </svg>
+        NoteWeb
+      </a>
+      
+      <div>
+        <ul class="nav justify-content-end">
+          <button type="button" class="btn btn-outline-light me-2 mb-1" aria-current="page" [routerLink]="['/notes']">Notes</button>
+          <button type="button" class="btn btn-outline-light me-2 mb-1" aria-current="page" [routerLink]="['/tags']">Tags</button>
+          <button type="button" class="btn btn-outline-light me-2 mb-1" aria-current="page" [routerLink]="['/reminders']">Reminders</button>
+        </ul>
+      </div>
+
+    </div>
+  </nav>
+
+  <router-outlet></router-outlet>
+  
+  <div class="container">
+    <figure class="text-center py-3 my-4">
+      <blockquote class="blockquote">
+        <p>Заметки и напоминания - ключ к вашей организации и успеху. 
+          Они помогают зафиксировать прошлое, оценить настоящее и свести к минимуму забывчивость. 
+          Отлаженная система заметок умножает продуктивность и освобождает ум для креативности.</p>
+      </blockquote>
+      <figcaption class="blockquote-footer">
+        Someone famous in <cite title="Source Title">red cucumbers</cite>
+      </figcaption>
+    </figure>
+
+    <footer class="">
+      <p class="text-center text-body-secondary">© 2023 red cucumbers, Inc</p>
+    </footer>
+
+  </div>
+</div>
