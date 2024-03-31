@@ -8,13 +8,15 @@ import { NotesListComponent } from './Components/Notes/notes-list/notes-list.com
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { RemindersListComponent } from './Components/Reminders/reminders-list/reminders-list.component';
+import { LoginComponent } from './Components/login/login.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     TagsListComponent,
     NotesListComponent,
-    RemindersListComponent
+    RemindersListComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
